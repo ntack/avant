@@ -8,7 +8,10 @@ def factor(numbers,cacheFile="factorCache.txt"):
     inputTuple=tuple(numbers)#must be immutable
     cacheData = open(cacheFile,'a+')#open cache,
         #create new text file if necessary
-    cache=pickle.load(cacheData)
+    try:
+        cache=pickle.load(cacheData)
+    except EOFError:
+        cache={}
     cacheData.close()
 
     if inputTuple in cache:
@@ -48,4 +51,5 @@ def inverseFactor(numbers,cacheFile="factorCache.txt"):
         for y in start[x]:
             ans[y].append(x)
     return ans
-            
+
+
